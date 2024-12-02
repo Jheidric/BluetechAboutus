@@ -26,16 +26,7 @@
             z-index: -1;
         }
 
-        .background-video::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Overlay gradient */
-            z-index: 0;
-        }
+        
 
         /* Header with Menu */
         header {
@@ -326,9 +317,9 @@
         const profile = profiles[index - 1];
         document.getElementById('profile-img').src = profile.img;
         document.getElementById('profile-name').textContent = profile.name;
-        document.getElementById('profile-contact').textContent = Contact: ${profile.contact};
-        document.getElementById('profile-email').textContent = Email: ${profile.email};
-        document.getElementById('profile-facebook').textContent = Facebook: ${profile.facebook};
+        document.getElementById('profile-contact').textContent = `Contact: ${profile.contact}`;
+        document.getElementById('profile-email').textContent = `Email: ${profile.email}`;
+        document.getElementById('profile-facebook').textContent = `Facebook: ${profile.facebook}`;
         document.getElementById('profile-info').textContent = profile.info;
     }
 
