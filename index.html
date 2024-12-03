@@ -45,6 +45,7 @@
             font-weight: bold;
             color: white;
             cursor: pointer;
+            text-decoration: none; /* Remove underline */
         }
 
         nav {
@@ -228,7 +229,7 @@
             contact: '+63-921-700-0741',
             email: 'jjDumagat@kld.edu.ph',
             facebook: 'https://facebook.com/janjheidricdumagat',
-            info: 'Senior Programmer and web developer expert in java language and html web development graduate of Bachelor of Science in Information Systems at Kolehiyo ng Lungsod ng Dasmariñas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Nulla vitae elit libero, a pharetra augue. Quisque ut nulla. Vestibulum rutrum rutrum neque. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui.',
+            info: 'Senior Programmer and web developer expert in java language and html web development graduate of Bachelor of Science in Information Systems at Kolehiyo ng Lungsod ng Dasmariñas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Nulla vitae elit libero, a pharetra augue. Quisque ut nulla. Vestibulum rutrum rutrum neque. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui.',
             img: 'images/download.jpg'
         },
         {
@@ -252,41 +253,39 @@
             contact: '+63-963-872-3370',
             email: 'jadericketolle@gmail.com',
             facebook: 'https://www.facebook.com/jaderick.etolle',
-            info: 'A dedicated member of Bluetech, with a passion for technology and problem-solving. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.',
+            info: 'Full stack developer with experience in both front-end and back-end technologies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             img: 'https://via.placeholder.com/100'
         }
     ];
 
-    // Function to display the profile in the popup
-    function showProfile(index) {
-        const profile = profiles[index];
-        document.getElementById('profile-img').src = profile.img;
-        document.getElementById('profile-name').innerText = profile.name;
-        document.getElementById('profile-contact').innerText = 'Contact: ' + profile.contact;
-        document.getElementById('profile-email').innerText = 'Email: ' + profile.email;
-        document.getElementById('profile-facebook').innerHTML = '<a href="' + profile.facebook + '" target="_blank">Facebook Profile</a>';
-        document.getElementById('profile-info').innerText = profile.info;
-        document.getElementById('popup-box').classList.add('show');
-    }
-
-    // Show the profile when clicking on "About Us"
+    // Toggle Pop-Up Box
     function togglePopup() {
         const popupBox = document.getElementById('popup-box');
+        popupBox.classList.toggle('show');
         if (popupBox.classList.contains('show')) {
-            popupBox.classList.remove('show');
-        } else {
-            showProfile(currentProfileIndex);
+            displayProfile();
         }
     }
 
-    // Change profile when clicking left or right button
+    // Display Profile Information
+    function displayProfile() {
+        const profile = profiles[currentProfileIndex];
+        document.getElementById('profile-img').src = profile.img;
+        document.getElementById('profile-name').textContent = profile.name;
+        document.getElementById('profile-contact').textContent = `Contact: ${profile.contact}`;
+        document.getElementById('profile-email').textContent = `Email: ${profile.email}`;
+        document.getElementById('profile-facebook').textContent = `Facebook: ${profile.facebook}`;
+        document.getElementById('profile-info').textContent = profile.info;
+    }
+
+    // Change Profile (left or right)
     function changeProfile(direction) {
         if (direction === 'left') {
             currentProfileIndex = (currentProfileIndex - 1 + profiles.length) % profiles.length;
         } else {
             currentProfileIndex = (currentProfileIndex + 1) % profiles.length;
         }
-        showProfile(currentProfileIndex);
+        displayProfile();
     }
 </script>
 
