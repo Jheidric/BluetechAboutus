@@ -26,8 +26,6 @@
             z-index: -1;
         }
 
-        
-
         /* Header with Menu */
         header {
             background-color: #333;
@@ -288,10 +286,7 @@
             facebook: 'https://facebook.com/janjheidricdumagat',
             info: 'I am a full stack developer, experienced with both front-end and back-end technologies...',
             img: 'https://via.placeholder.com/100'
-        },
-
-
-        // Additional profiles can be added here
+        }
     ];
 
     // Open or Close the Pop-Up Box
@@ -318,8 +313,8 @@
         document.getElementById('profile-img').src = profile.img;
         document.getElementById('profile-name').textContent = profile.name;
         document.getElementById('profile-contact').textContent = `Contact: ${profile.contact}`;
-        document.getElementById('profile-email').textContent = `Email: ${profile.email}`;
-        document.getElementById('profile-facebook').textContent = `Facebook: ${profile.facebook}`;
+        document.getElementById('profile-email').innerHTML = `Email: <a href="mailto:${profile.email}">${profile.email}</a>`;
+        document.getElementById('profile-facebook').innerHTML = `Facebook: <a href="${profile.facebook}" target="_blank">${profile.facebook}</a>`;
         document.getElementById('profile-info').textContent = profile.info;
     }
 
@@ -336,3 +331,4 @@
 
 </body>
 </html>
+
