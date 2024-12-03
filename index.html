@@ -72,14 +72,6 @@
                 flex-direction: column;
                 margin-top: 10px;
             }
-
-            .product-service {
-                flex-direction: column;
-            }
-
-            .product-service div {
-                margin-bottom: 40px;
-            }
         }
 
         nav a:hover {
@@ -236,7 +228,7 @@
             email: 'jjDumagat@kld.edu.ph',
             facebook: 'https://facebook.com/janjheidricdumagat',
             info: 'Senior Programmer and web developer expert in java language and html web development...',
-            img: 'download.jpg'
+            img: 'images/download.jpg'
         },
         {
             name: 'Aeron Cyrus A. Marasigan',
@@ -283,19 +275,11 @@
     // Toggle Pop-Up Box
     function togglePopup() {
         const popupBox = document.getElementById('popup-box');
-        const isVisible = popupBox.style.display === 'block';
-        if (isVisible) {
-            popupBox.classList.remove('show');
-            setTimeout(() => {
-                popupBox.style.display = 'none'; // Hide after transition
-            }, 500);
-        } else {
-            popupBox.style.display = 'block';
-            setTimeout(() => {
-                popupBox.classList.add('show');
-            }, 10);
-            showProfile(currentProfileIndex);
-        }
+        popupBox.style.display = 'block';  // Make it visible
+        setTimeout(() => {
+            popupBox.classList.add('show');
+        }, 10);
+        showProfile(currentProfileIndex);
     }
 
     // Show Profile
