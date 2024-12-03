@@ -6,31 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bluetech Website</title>
     <style>
-        /* Basic Styles */
         html, body {
-            height: 100%;
+            height: 100%;  
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Prevent scrolling */
         }
 
         /* Video Background */
         .background-video {
-            position: fixed; /* Fix video to background */
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%; /* Ensure it covers the entire screen */
-            object-fit: cover; /* Make sure the video covers the screen */
-            z-index: -1; /* Ensure the video stays behind the content */
+            height: 120%;
+            object-fit: cover;
+            z-index: -1;
         }
 
-        /* Header Section */
+        
+
+        /* Header with Menu */
         header {
-            background-color: rgba(51, 51, 51, 0.8);
+            background-color: #333;
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -62,6 +62,26 @@
             font-size: 18px;
             cursor: pointer;
             transition: transform 0.2s;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            .product-service {
+                flex-direction: column;
+            }
+
+            .product-service div {
+                margin-bottom: 40px;
+            }
         }
 
         nav a:hover {
@@ -128,15 +148,54 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
+        .popup-box.profile-change {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .popup-btn-container {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            width: 100%;
+        }
+
+        .left-btn, .right-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .left-btn {
+            left: 10px;
+        }
+
+        .right-btn {
+            right: 10px;
+        }
+
+        .left-btn:hover, .right-btn:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 
 <body>
 
 <!-- Background Video -->
-<video class="background-video" autoplay muted loop playsinline>
+<video class="background-video" autoplay muted loop>
     <source src="videobackground.mp4" type="video/mp4">
-    Your browser does not support the video tag.
 </video>
 
 <!-- Header Section -->
@@ -161,6 +220,12 @@
     <p id="profile-email"></p>
     <p id="profile-facebook"></p>
     <p id="profile-info"></p>
+
+    <!-- Navigation Buttons for the profile pop-up -->
+    <div class="popup-btn-container">
+        <button class="left-btn" onclick="changeProfile('left')">←</button>
+        <button class="right-btn" onclick="changeProfile('right')">→</button>
+    </div>
 </div>
 
 <!-- Footer -->
@@ -179,9 +244,57 @@
             facebook: 'https://facebook.com/janjheidricdumagat',
             info: 'I am a Senior Programmer and web developer master in java language and html web development...',
             img: 'https://via.placeholder.com/100'
-        }
+        },
+        {
+            name: 'Jan Jheidric S. Dumagat 2',
+            contact: '+63-921-700-0742',
+            email: 'jjDumagat@kld.edu.ph',
+            facebook: 'https://facebook.com/janjheidricdumagat',
+            info: 'I am a full stack developer, experienced with both front-end and back-end technologies...',
+            img: 'https://via.placeholder.com/100'
+        },
+
+        {
+            name: 'Jan Jheidric S. Dumagat 3',
+            contact: '+63-921-700-0742',
+            email: 'jjDumagat@kld.edu.ph',
+            facebook: 'https://facebook.com/janjheidricdumagat',
+            info: 'I am a full stack developer, experienced with both front-end and back-end technologies...',
+            img: 'https://via.placeholder.com/100'
+        },
+
+        {
+            name: 'Jan Jheidric S. Dumagat 4',
+            contact: '+63-921-700-0742',
+            email: 'jjDumagat@kld.edu.ph',
+            facebook: 'https://facebook.com/janjheidricdumagat',
+            info: 'I am a full stack developer, experienced with both front-end and back-end technologies...',
+            img: 'https://via.placeholder.com/100'
+        },
+
+        {
+            name: 'Jan Jheidric S. Dumagat 5',
+            contact: '+63-921-700-0742',
+            email: 'jjDumagat@kld.edu.ph',
+            facebook: 'https://facebook.com/janjheidricdumagat',
+            info: 'I am a full stack developer, experienced with both front-end and back-end technologies...',
+            img: 'https://via.placeholder.com/100'
+        },
+
+        {
+            name: 'Jan Jheidric S. Dumagat 6',
+            contact: '+63-921-700-0742',
+            email: 'jjDumagat@kld.edu.ph',
+            facebook: 'https://facebook.com/janjheidricdumagat',
+            info: 'I am a full stack developer, experienced with both front-end and back-end technologies...',
+            img: 'https://via.placeholder.com/100'
+        },
+
+
+        // Additional profiles can be added here
     ];
 
+    // Open or Close the Pop-Up Box
     function togglePopup() {
         const popupBox = document.getElementById('popup-box');
         const isVisible = popupBox.style.display === 'block';
@@ -195,7 +308,29 @@
             setTimeout(() => {
                 popupBox.classList.add('show');
             }, 10);
+            showProfile(currentProfileIndex);
         }
+    }
+
+    // Show Profile
+    function showProfile(index) {
+        const profile = profiles[index - 1];
+        document.getElementById('profile-img').src = profile.img;
+        document.getElementById('profile-name').textContent = profile.name;
+        document.getElementById('profile-contact').textContent = `Contact: ${profile.contact}`;
+        document.getElementById('profile-email').textContent = `Email: ${profile.email}`;
+        document.getElementById('profile-facebook').textContent = `Facebook: ${profile.facebook}`;
+        document.getElementById('profile-info').textContent = profile.info;
+    }
+
+    // Change Profile
+    function changeProfile(direction) {
+        if (direction === 'left') {
+            currentProfileIndex = currentProfileIndex === 1 ? profiles.length : currentProfileIndex - 1;
+        } else {
+            currentProfileIndex = currentProfileIndex === profiles.length ? 1 : currentProfileIndex + 1;
+        }
+        showProfile(currentProfileIndex);
     }
 </script>
 
