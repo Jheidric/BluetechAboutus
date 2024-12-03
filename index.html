@@ -21,9 +21,20 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;  /* Fixing height to cover full screen */
+            height: 120%;  /* Fixing height to cover full screen */
             object-fit: cover;
             z-index: -1;
+        }
+
+        .background-video::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Overlay gradient */
+            z-index: 0;
         }
 
         /* Header with Menu */
