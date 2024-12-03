@@ -17,24 +17,13 @@
 
         /* Video Background */
         .background-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 120%;  /* Fixing height to cover full screen */
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        .background-video::after {
-            content: '';
-            position: absolute;
+            position: fixed; /* Fix video to the background */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Overlay gradient */
-            z-index: 0;
+            object-fit: cover; /* Ensure the video covers the entire viewport */
+            z-index: -1; /* Place video behind all content */
         }
 
         /* Header with Menu */
@@ -71,26 +60,6 @@
             font-size: 18px;
             cursor: pointer;
             transition: transform 0.2s;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            nav {
-                flex-direction: column;
-                margin-top: 10px;
-            }
-
-            .product-service {
-                flex-direction: column;
-            }
-
-            .product-service div {
-                margin-bottom: 40px;
-            }
         }
 
         nav a:hover {
@@ -157,11 +126,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        .popup-box.profile-change {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
         .popup-btn-container {
             position: absolute;
             top: 50%;
@@ -202,12 +166,12 @@
 
 <body>
 
-    <video class="background-video" autoplay muted loop poster="fallback.jpg">
-        <source src="videobackground2.mp4" type="video/mp4">
-    </video>
-
-
-        
+<!-- Background Video -->
+<video class="background-video" autoplay muted loop playsinline>
+    <source src="videobackground.mp4" type="video/mp4">
+    <!-- You can add fallback content here -->
+    Your browser does not support the video tag.
+</video>
 
 <!-- Header Section -->
 <header>
@@ -309,4 +273,3 @@
 
 </body>
 </html>
-
