@@ -45,7 +45,6 @@
             font-weight: bold;
             color: white;
             cursor: pointer;
-            text-decoration: none; /* Remove underline */
         }
 
         nav {
@@ -110,13 +109,12 @@
             box-shadow: 0 12px 30px rgba(163, 140, 140, 0.3);
             width: 80%;
             max-width: 700px;
-            height: 500px; /* Adjusted for more space */
+            height: 400px;
             border-radius: 15px;
             z-index: 10;
             text-align: center;
             opacity: 0;
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            overflow-y: auto; /* Scrollable if content overflows */
         }
 
         .popup-box img {
@@ -222,14 +220,14 @@
 
 <!-- JavaScript -->
 <script>
-    let currentProfileIndex = 0; // Corrected to start from the first profile
+    let currentProfileIndex = 1;
     const profiles = [
         { 
             name: 'Jan Jheidric S. Dumagat',
             contact: '+63-921-700-0741',
             email: 'jjDumagat@kld.edu.ph',
             facebook: 'https://facebook.com/janjheidricdumagat',
-            info: 'Senior Programmer and web developer expert in java language and html web development graduate of Bachelor of Science in Information Systems at Kolehiyo ng Lungsod ng Dasmariñas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Nulla vitae elit libero, a pharetra augue. Quisque ut nulla. Vestibulum rutrum rutrum neque. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui.',
+            info: 'Senior Programmer and web developer expert in java language and html web development graduate of Bachelor of Science in Information Systems at Kolehiyo ng Lungsod ng Dasmariñas.',
             img: 'images/download.jpg'
         },
         {
@@ -237,7 +235,7 @@
             contact: '+63-977-386-6245',
             email: 'yasuomaster318@gmail.com',
             facebook: 'https://www.facebook.com/aeron.marasigan',
-            info: 'L One of the lead persons in bluetech. He is an expert in hardware troubleshooting and building PCs. He is a graduate of Bachelor of Science in Information Systems at Kolehiyo ng Lungsod ng Dasmariñas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.',
+            info: 'L One of the lead persons in bluetech. He is an expert in hardware troubleshooting and building PCs. He is a graduate of Bachelor of Science in Information Systems at Kolehiyo ng Lungsod ng Dasmariñas.',
             img: 'https://via.placeholder.com/100'
         },
         {
@@ -245,7 +243,7 @@
             contact: '+63-912-345-6789',
             email: 'wryivankenji18@gmail.com',
             facebook: 'https://www.facebook.com/ivan.cuevas',
-            info: 'Loves Beltran sisters. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.',
+            info: 'Loves Beltran sisters.',
             img: 'https://via.placeholder.com/100'
         },
         {
@@ -253,7 +251,23 @@
             contact: '+63-963-872-3370',
             email: 'jadericketolle@gmail.com',
             facebook: 'https://www.facebook.com/jaderick.etolle',
-            info: 'Full stack developer with experience in both front-end and back-end technologies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            info: 'Full stack developer with experience in both front-end and back-end technologies.',
+            img: 'https://via.placeholder.com/100'
+        },
+        {
+            name: 'Jan Jheidric S. Dumagat 5',
+            contact: '+63-921-700-0742',
+            email: 'jjDumagat@kld.edu.ph',
+            facebook: 'https://facebook.com/janjheidricdumagat',
+            info: 'Full stack developer with experience in both front-end and back-end technologies.',
+            img: 'https://via.placeholder.com/100'
+        },
+        {
+            name: 'Jan Jheidric S. Dumagat 6',
+            contact: '+63-921-700-0742',
+            email: 'jjDumagat@kld.edu.ph',
+            facebook: 'https://facebook.com/janjheidricdumagat',
+            info: 'Full stack developer with experience in both front-end and back-end technologies.',
             img: 'https://via.placeholder.com/100'
         }
     ];
@@ -261,31 +275,32 @@
     // Toggle Pop-Up Box
     function togglePopup() {
         const popupBox = document.getElementById('popup-box');
-        popupBox.classList.toggle('show');
-        if (popupBox.classList.contains('show')) {
-            displayProfile();
-        }
+        popupBox.style.display = 'block';  // Make it visible
+        setTimeout(() => {
+            popupBox.classList.add('show');
+        }, 10);
+        showProfile(currentProfileIndex);
     }
 
-    // Display Profile Information
-    function displayProfile() {
-        const profile = profiles[currentProfileIndex];
+    // Show Profile
+    function showProfile(index) {
+        const profile = profiles[index - 1];
         document.getElementById('profile-img').src = profile.img;
         document.getElementById('profile-name').textContent = profile.name;
         document.getElementById('profile-contact').textContent = `Contact: ${profile.contact}`;
-        document.getElementById('profile-email').textContent = `Email: ${profile.email}`;
-        document.getElementById('profile-facebook').textContent = `Facebook: ${profile.facebook}`;
+        document.getElementById('profile-email').innerHTML = `Email: <a href="mailto:${profile.email}" target="_blank">${profile.email}</a>`;
+        document.getElementById('profile-facebook').innerHTML = `Facebook: <a href="${profile.facebook}" target="_blank">${profile.facebook}</a>`;
         document.getElementById('profile-info').textContent = profile.info;
     }
 
-    // Change Profile (left or right)
+    // Change Profile
     function changeProfile(direction) {
         if (direction === 'left') {
-            currentProfileIndex = (currentProfileIndex - 1 + profiles.length) % profiles.length;
+            currentProfileIndex = currentProfileIndex === 1 ? profiles.length : currentProfileIndex - 1;
         } else {
-            currentProfileIndex = (currentProfileIndex + 1) % profiles.length;
+            currentProfileIndex = currentProfileIndex === profiles.length ? 1 : currentProfileIndex + 1;
         }
-        displayProfile();
+        showProfile(currentProfileIndex);
     }
 </script>
 
